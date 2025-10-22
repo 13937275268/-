@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+# 在 main 分支发生 push 时触发部署
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifacts for Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './'  # 上传仓库根目录的所有静态文件
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        Commit changes
